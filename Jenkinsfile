@@ -87,8 +87,8 @@ pipeline {
                     
                     def dockerRunCmd = "sudo docker run -p 8080:8080 -d mayur181/sakshi:${IMAGE_NAME}"
                     
-                    def dockerStop="sudo docker stop mayur181/sakshi"
-                    def dockerDelete="sudo docker rm mayur181/sakshi"
+                    def dockerStop="sudo docker stop \$(docker ps -a -q)"
+                    def dockerDelete="sudo docker rm \$(docker ps -a -q)"
                   sshagent(['ec2-prod']) {
 //                         sh "ssh -o StrictHostKeyChecking=no ec2-user@54.86.25.242 ${dockerRunCmd}"
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@54.86.25.242  ${dockerStop}"
