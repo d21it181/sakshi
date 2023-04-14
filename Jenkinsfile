@@ -47,7 +47,7 @@ pipeline {
                     sh 'mvn clean package'
                     def version = (readFile('pom.xml') =~ '<version>(.+)</version>')[0][1]
                     env.IMAGE_NAME = "$version-Build-$BUILD_NUMBER"
-                    sh "docker build -t learnwithparth/spring-boot:${IMAGE_NAME} ."    
+                    sh "docker build -t mayur181/sakshi:${IMAGE_NAME} ."    
                     }
             }
         }
@@ -62,24 +62,24 @@ pipeline {
                 sh 'mvn test'}
             }
         }
-//       stage('push') {
-//         // input{
-//         //     message "Select the environment to deploy"
-//         //     ok "done"
-//         //     parameters{
-//         //         choice(name: 'Type', choices:['Dev','Test','Deploy'], description: '')
-//         //     }
+      stage('push') {
+        // input{
+        //     message "Select the environment to deploy"
+        //     ok "done"
+        //     parameters{
+        //         choice(name: 'Type', choices:['Dev','Test','Deploy'], description: '')
+        //     }
 
-//         // }
-//             steps {
-//                 script{echo 'deploying the application'
-//                 withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
-//                     sh "echo ${PASSWORD} | docker login -u ${USERNAME} --password-stdin"
-//                     sh "docker push learnwithparth/spring-boot:${IMAGE_NAME}"
-//                 }}
+        // }
+            steps {
+                script{echo 'deploying the application'
+                withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
+                    sh "echo ${PASSWORD} | docker login -u ${USERNAME} --password-stdin"
+                    sh "docker push mayur181/sakshi:${IMAGE_NAME}"
+                }}
                 
-//              }
-//         }
+             }
+        }
 //         stage('deploy'){
 //             steps{
 //                 script{
