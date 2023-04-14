@@ -84,6 +84,7 @@ pipeline {
             steps{
                 script{
                     def dockerRestart = 'sudo service docker restart'
+                    
                     def dockerRunCmd = "sudo docker run -p 8080:8080 -d mayur181/sakshi:${IMAGE_NAME}"
                     
                     def dockerStop="sudo docker stop mayur181/sakshi"
