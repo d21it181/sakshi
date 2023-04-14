@@ -80,17 +80,17 @@ pipeline {
                 
              }
         }
-//         stage('deploy'){
-//             steps{
-//                 script{
-//                     def dockerRestart = 'sudo service docker restart'
-//                     def dockerRunCmd = "sudo docker run -p 8080:8080 -d learnwithparth/spring-boot:${IMAGE_NAME}"
-//                   sshagent(['ec2-prod']) {
-//                         sh "ssh -o StrictHostKeyChecking=no ec2-user@54.237.0.178 ${dockerRunCmd}"
-//                     }  
-//                 }
-//             }
-//         }
+        stage('deploy'){
+            steps{
+                script{
+                    def dockerRestart = 'sudo service docker restart'
+                    def dockerRunCmd = "sudo docker run -p 8080:8080 -d mayur181/sakshi:${IMAGE_NAME}"
+                  sshagent(['ec2-prod']) {
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@18.212.182.112 ${dockerRunCmd}"
+                    }  
+                }
+            }
+        }
 
         // stage('commit and push to git'){
         //     steps{
